@@ -1,0 +1,103 @@
+<!-- navbar.html -->
+<style>
+    /* Refined Navbar Styles */
+    .navbar-refined {
+        background-color: #273c75; /* Deeper shade of blue for elegance */
+        font-family: 'Open Sans', sans-serif; /* Sleek, professional font */
+    }
+
+    .navbar-refined .navbar-brand, .navbar-refined .nav-link {
+        color: #f5f6fa; /* Bright, readable text color */
+    }
+
+    .navbar-refined .nav-link {
+        margin-right: 20px; /* Enhanced spacing between navigation links */
+    }
+
+    .navbar-refined .navbar-text {
+        margin-right: 20px;
+        padding: 10px 15px; /* Refined padding for visual appeal */
+        background-color: #353b48; /* Slightly darker background for distinction */
+        border-radius: 5px; /* Smooth, rounded corners */
+        color: #f5f6fa; /* Consistent, bright text color */
+    }
+
+    .navbar-refined .navbar-toggler {
+        border-color: rgba(0,0,0,0); /* Remove border color */
+    }
+
+    .navbar-refined .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23f5f6fa' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+    /* Enhanced Alert Styles */
+    .alert-custom {
+        font-size: 1rem; /* Increased font size for clarity */
+        padding: 15px; /* Balanced padding for emphasis */
+        margin-bottom: 20px; /* Adequate spacing below alerts */
+        border-radius: 5px; /* Consistently rounded corners for all alerts */
+        border: 1px solid transparent; /* Subtle border styling */
+    }
+
+    .alert-custom-success {
+        background-color: #2ecc71; /* Vibrant green for success alerts */
+        color: #ffffff; /* High contrast text color */
+    }
+
+    .alert-custom-danger {
+        background-color: #e74c3c; /* Deep red for danger alerts */
+        color: #ffffff; /* Clear text color for readability */
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-refined">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Outfit Recommendations for You</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                </li>
+                {% if session.user_id %}
+                    <li class="nav-item">
+                        <span class="navbar-text">Welcome, {{ session.username }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/{{ user_id }}/feedback">My Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/browse">Browse</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- jQuery and Bootstrap Bundle (includes Popper) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Enhanced JavaScript for modal and alert interactions
+        // Display modal if alerts are present
+        if ($('.alert').length > 0) {
+            // Logic to display the modal or trigger alert-specific behaviors
+            console.log('Flash message present, implement modal or display logic as needed.');
+        }
+    });
+</script>

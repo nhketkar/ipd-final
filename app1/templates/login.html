@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Fashion Recommender System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image:url('static/background.jpg'); /* Adjust path as needed */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .brand-wrapper {
+            margin-bottom: 20px;
+            background-color: #FFF;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* More pronounced shadow for depth */
+            border-radius: 10px; /* Rounded corners for a softer look */
+        }
+        .brand-wrapper .logo {
+            height: 80px; /* Slightly larger logo for emphasis */
+        }
+        .wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Center align the form wrapper for better positioning */
+        }
+        .form-wrapper {
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+            padding: 40px;
+            background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%); /* Example gradient background */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            border: 2px solid #fcb69f; /* Example solid border */
+        }
+        .form-control {
+            border: 1px solid #CBD5E1; /* Lighter border color */
+            border-radius: 8px; /* Matching rounded corners */
+        }
+        .form-control:focus {
+            border-color: #93C5FD; /* Lighter focus color */
+            box-shadow: 0 0 0 0.2rem rgba(147, 197, 253, 0.25); /* Subtle focus shadow */
+        }
+        .form-button {
+            background-color: #3B82F6; /* Richer button color for better contrast */
+            padding: 12px; /* Increased padding for a better click area */
+            font-size: 16px; /* Larger font size for readability */
+            border-radius: 8px; /* Consistent rounded corners */
+        }
+        .form-button:hover {
+            background-color: #2563EB; /* Slightly darker hover state */
+        }
+        .form-footer {
+            text-align: center;
+            padding-top: 20px; /* Increased padding for spacing */
+        }
+        .form-footer a {
+            color: #3B82F6; /* Link color matching the button for consistency */
+        }
+        .alert {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            color: #ffffff; /* Maintain light text for readability */
+            background-color: #e99695; /* Darker, soft red for elegance */
+            border-color: #e6807f; /* Slightly darker border for subtle contrast */
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Very subtle shadow for depth */
+            transition: all 0.3s ease-in-out; /* Smooth transition for hover effect */
+        }
+    
+        .alert:hover {
+            background-color: #e6807f; /* Slightly darker on hover for interactive feel */
+            border-color: #e36b64; /* Adjust border color on hover for consistency */
+        }
+    
+        /* Darker Soft Red Error Message Styling */
+        .error-message {
+            color: #e99695; /* Darker, soft red for error messages */
+            font-size: 0.9rem; /* Appropriate font size for readability */
+            margin-top: 5px; /* Adequate spacing above for clarity */
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} text-center" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="wrapper">
+        <div class="form-wrapper">
+            <h2 class="text-center">Login to Your Account</h2>
+            <!-- Updated Form for login -->
+            <form action="{{ url_for('login') }}" method="post">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.username.label(class="form-label") }}
+                    {{ form.username(class="form-control", id="emailInput") }}
+                    {% for error in form.username.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password(class="form-control", id="passwordInput") }}
+                    {% for error in form.password.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn form-button">Login</button>
+            </form>
+            <div class="form-footer">
+                <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
